@@ -43,7 +43,7 @@ def crop_video_detecing_face(source_video, source_image):
     # Crop the video
     cropped_video_command = [
         'ffmpeg', '-i', source_video,
-        '-vf', f"crop={total_width}:{total_height}:{final_x}:{final_y}, scale=1080:1920",
+        '-vf', f"crop={total_width}:{total_height}:{final_x}:{final_y}",
         '-c:v', 'libx264', f"cropped_{source_video}"
     ]
 

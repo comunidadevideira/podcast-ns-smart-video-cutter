@@ -61,10 +61,10 @@ def crop_video_detecing_face(source_video, source_image, destination_video):
     if (final_y + total_height > image_height):
         final_y = final_y - (final_y + total_height - image_height)
 
-    final_x = math.trunc(final_x) # Round
-    final_y = math.trunc(final_y)
-    total_width = math.trunc(total_width)
-    total_height = math.trunc(total_height)
+    final_x = round(final_x) # Round
+    final_y = round(final_y)
+    total_width = round(total_width)
+    total_height = round(total_height)
 
     # Crop the video
     cropped_video_command = [

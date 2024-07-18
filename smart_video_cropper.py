@@ -1,12 +1,10 @@
 from retinaface import RetinaFace
+from PIL import Image 
 import subprocess
 import math
 
-VIDEO_WIDTH = 1080
-VIDEO_HEIGHT = 1920
-IMAGE_WIDTH = 640
-IMAGE_HEIGTH = 360
-HEAD_PERCENTAGE_FOR_FRAME_WIDHT=25
+VIDEO_PROPORTION = 1080 / 1920
+HEAD_PERCENTAGE_FOR_FRAME_WIDHT=25 # %, the detected head correpond to X% of the frame desired width
 
 def cut_video(source_video, begin, end, destination_video):
     ffmpeg_command = [
@@ -34,6 +32,10 @@ def extract_first_frame_image(source_video, at_time, destination_video):
 
 def crop_video_detecing_face(source_video, source_image, destination_video):
 
+    img = Image.open(source_image)
+    image_width = img.width
+    image_height = img.height
+
     faces = RetinaFace.detect_faces(source_image)
     print(f"Face detected at: {faces['face_1']['facial_area']}")
     x1, y1, x2, y2 = faces['face_1']['facial_area']
@@ -47,17 +49,17 @@ def crop_video_detecing_face(source_video, source_image, destination_video):
     if (final_x < 0): # Protect overlap on X axis
         final_x = 0
 
-    if (final_x + total_width > IMAGE_WIDTH):
-        final_x = final_x - (final_x + total_width - IMAGE_WIDTH)
+    if (final_x + total_width > image_width):
+        final_x = final_x - (final_x + total_width - image_width)
 
-    total_height = total_width * (VIDEO_HEIGHT / VIDEO_WIDTH)
+    total_height = total_width * VIDEO_PROPORTION
     final_y = y1 - (y2 - y1)
 
     if (final_y < 0): # Protect overlap on Y axis
         final_y = 0
 
-    if (final_y + total_height > IMAGE_HEIGTH):
-        final_y = final_y - (final_y + total_height - IMAGE_HEIGTH)
+    if (final_y + total_height > image_height):
+        final_y = final_y - (final_y + total_height - image_height)
 
     final_x = math.trunc(final_x) # Round
     final_y = math.trunc(final_y)

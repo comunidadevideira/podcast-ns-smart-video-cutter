@@ -15,11 +15,6 @@ with open(csv_file, mode='r') as file:
     for row in csv_reader:
         segments.append(row)
 
-# Function to convert time format
-def convert_time_to_seconds(time_str):
-    h, m, s = map(float, time_str.split(':'))
-    return h * 3600 + m * 60 + s
-
 # Loop through each segment and cut the video
 for segment in segments:
     print(segment)

@@ -5,12 +5,12 @@ from smart_video_cropper import crop_video_detecing_face, cut_video, extract_fir
 # Define the input video file
 INPUT_VIDEO = 'input_video.mp4'
 DESTINATION_FOLDER='/Users/samuelbezerrab/Developer/scripts/podcast-smart-video-cutter/exported/'
+CSV_FILE = 'video_segments.csv'
 
 # Read the CSV file
-csv_file = 'video_segments.csv'
 segments = []
 
-with open(csv_file, mode='r') as file:
+with open(CSV_FILE, mode='r') as file:
     csv_reader = csv.DictReader(file)
     for row in csv_reader:
         segments.append(row)

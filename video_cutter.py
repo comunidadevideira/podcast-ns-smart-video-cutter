@@ -4,6 +4,7 @@ from smart_video_cropper import crop_video_detecing_face
 
 # Define the input video file
 INPUT_VIDEO = 'input_video.mp4'
+DESTINATION_FOLDER='/Users/samuelbezerrab/Developer/scripts/podcast-smart-video-cutter/exported/'
 
 # Read the CSV file
 csv_file = 'video_segments.csv'
@@ -34,7 +35,7 @@ for segment in segments:
         '-ss', begin,
         '-to', end,
         '-c', 'copy',
-        f"{title}.mp4"
+        f"{DESTINATION_FOLDER}{title}.mp4"
     ]
     
     image_command = [
@@ -43,11 +44,11 @@ for segment in segments:
         '-i', INPUT_VIDEO,
         '-vframes', '1',
         '-q:v', '2',
-        f"{title}.jpg"
+        f"{DESTINATION_FOLDER}{title}.jpg"
     ]
 
     subprocess.run(image_command)
     subprocess.run(video_command)
-    crop_video_detecing_face(f"{title}.mp4", f"{title}.jpg")
+    crop_video_detecing_face(f"{DESTINATION_FOLDER}{title}.mp4", f"{DESTINATION_FOLDER}{title}.jpg", f"{DESTINATION_FOLDER}{title}_cropped.mp4")
 
 print("Video segments have been created successfully.")

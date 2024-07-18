@@ -8,7 +8,7 @@ IMAGE_WIDTH = 640
 IMAGE_HEIGTH = 360
 HEAD_PERCENTAGE_FOR_FRAME_WIDHT=25
 
-def crop_video_detecing_face(source_video, source_image):
+def crop_video_detecing_face(source_video, source_image, destination_video):
 
     faces = RetinaFace.detect_faces(source_image)
     print(f"Face detected at: {faces['face_1']['facial_area']}")
@@ -44,7 +44,7 @@ def crop_video_detecing_face(source_video, source_image):
     cropped_video_command = [
         'ffmpeg', '-i', source_video,
         '-vf', f"crop={total_width}:{total_height}:{final_x}:{final_y}",
-        '-c:v', 'libx264', f"cropped_{source_video}"
+        '-c:v', 'libx264', f"{destination_video}"
     ]
 
     subprocess.run(cropped_video_command)

@@ -31,8 +31,8 @@ for segment in segments:
     
     video_command = [
         'ffmpeg',
-        '-i', INPUT_VIDEO,
         '-ss', begin,
+        '-i', INPUT_VIDEO,
         '-to', end,
         '-c', 'copy',
         f"{DESTINATION_FOLDER}{title}.mp4"

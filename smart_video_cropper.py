@@ -8,6 +8,30 @@ IMAGE_WIDTH = 640
 IMAGE_HEIGTH = 360
 HEAD_PERCENTAGE_FOR_FRAME_WIDHT=25
 
+def cut_video(source_video, begin, end, destination_video):
+    ffmpeg_command = [
+        'ffmpeg',
+        '-ss', begin,
+        '-i', source_video,
+        '-to', end,
+        '-c', 'copy',
+        destination_video
+    ]
+
+    subprocess.run(ffmpeg_command)
+
+def extract_first_frame_image(source_video, at_time, destination_video):
+    ffmpeg_command = [
+        'ffmpeg',
+        '-ss', at_time,
+        '-i', source_video,
+        '-vframes', '1',
+        '-q:v', '2',
+        destination_video
+    ]
+
+    subprocess.run(ffmpeg_command)
+
 def crop_video_detecing_face(source_video, source_image, destination_video):
 
     faces = RetinaFace.detect_faces(source_image)
@@ -48,4 +72,3 @@ def crop_video_detecing_face(source_video, source_image, destination_video):
     ]
 
     subprocess.run(cropped_video_command)
-

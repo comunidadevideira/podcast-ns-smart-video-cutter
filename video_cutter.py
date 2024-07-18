@@ -1,6 +1,6 @@
 import csv
 import subprocess
-from smart_video_cropper import crop_video_detecing_face
+from smart_video_cropper import crop_video_detecing_face, cut_video, extract_first_frame_image
 
 # Define the input video file
 INPUT_VIDEO = 'input_video.mp4'
@@ -21,27 +21,9 @@ for segment in segments:
     title = segment['title']
     begin = segment['begin']
     end = segment['end']
-    
-    video_command = [
-        'ffmpeg',
-        '-ss', begin,
-        '-i', INPUT_VIDEO,
-        '-to', end,
-        '-c', 'copy',
-        f"{DESTINATION_FOLDER}{title}.mp4"
-    ]
-    
-    image_command = [
-        'ffmpeg',
-        '-ss', begin,
-        '-i', INPUT_VIDEO,
-        '-vframes', '1',
-        '-q:v', '2',
-        f"{DESTINATION_FOLDER}{title}.jpg"
-    ]
 
-    subprocess.run(image_command)
-    subprocess.run(video_command)
+    extract_first_frame_image(INPUT_VIDEO, begin, f"{DESTINATION_FOLDER}{title}.jpg")
+    cut_video(INPUT_VIDEO, begin, end, f"{DESTINATION_FOLDER}{title}.mp4")
     crop_video_detecing_face(f"{DESTINATION_FOLDER}{title}.mp4", f"{DESTINATION_FOLDER}{title}.jpg", f"{DESTINATION_FOLDER}{title}_cropped.mp4")
 
 print("Video segments have been created successfully.")

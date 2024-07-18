@@ -3,7 +3,7 @@ import subprocess
 from smart_video_cropper import crop_video_detecing_face
 
 # Define the input video file
-input_video = 'input_video.mp4'
+INPUT_VIDEO = 'input_video.mp4'
 
 # Read the CSV file
 csv_file = 'video_segments.csv'
@@ -30,7 +30,7 @@ for segment in segments:
     
     video_command = [
         'ffmpeg',
-        '-i', input_video,
+        '-i', INPUT_VIDEO,
         '-ss', begin,
         '-to', end,
         '-c', 'copy',
@@ -40,7 +40,7 @@ for segment in segments:
     image_command = [
         'ffmpeg',
         '-ss', begin,
-        '-i', input_video,
+        '-i', INPUT_VIDEO,
         '-vframes', '1',
         '-q:v', '2',
         f"{title}.jpg"

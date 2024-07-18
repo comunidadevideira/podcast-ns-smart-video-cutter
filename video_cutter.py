@@ -22,8 +22,6 @@ for segment in segments:
     begin = segment['begin']
     end = segment['end']
     
-    output_file = f"{title}.mp4"
-    
     video_command = [
         'ffmpeg',
         '-ss', begin,

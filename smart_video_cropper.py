@@ -10,8 +10,8 @@ def cut_video(source_video, begin, end, destination_video):
     ffmpeg_command = [
         'ffmpeg',
         '-ss', begin,
-        '-i', source_video,
         '-to', end,
+        '-i', source_video,
         '-c', 'copy',
         destination_video
     ]

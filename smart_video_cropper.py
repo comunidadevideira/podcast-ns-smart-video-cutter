@@ -52,7 +52,7 @@ def crop_video_detecing_face(source_video, source_image, destination_video):
     if (final_x + total_width > image_width):
         final_x = final_x - (final_x + total_width - image_width)
 
-    total_height = total_width * VIDEO_PROPORTION
+    total_height = total_width / VIDEO_PROPORTION
     final_y = y1 - (y2 - y1)
 
     if (final_y < 0): # Protect overlap on Y axis

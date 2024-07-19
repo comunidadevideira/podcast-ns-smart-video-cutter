@@ -4,7 +4,7 @@ from smart_video_cropper import crop_video_detecing_face, cut_video, extract_fir
 
 # Define the input video file
 INPUT_VIDEO = 'input_video.mov'
-DESTINATION_FOLDER='/Users/samuelbezerrab/Developer/scripts/podcast-smart-video-cutter/exported/'
+DESTINATION_FOLDER='./exported/'
 CSV_FILE = 'video_segments.csv'
 
 # Read the CSV file
